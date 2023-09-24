@@ -14,7 +14,7 @@
     />
     <link rel="stylesheet" href="/css/styles.css" />
 
-    <title>L'ultima Cena Pizzeria! - Orders</title>
+    <title>L'ultima Cena Pizzeria! - Beverages</title>
   </head>
 
   <body>
@@ -53,33 +53,37 @@
 
     <div class="container">
       <div class="jumbotron">
-        <div id="order-list">
-          <h2 class="text-center">Orders</h2>
-          <table id="orders" class="table bg-white table-bordered table-hover">
+        <div id="beverage-list">
+          <h2 class="text-center">Beverage</h2>
+          <table id="beverage" class="table bg-white table-bordered table-hover">
             <thead class="thead-dark">
               <tr class="d-flex">
-                <th class="col-3">Name</th>
-                <th class="col-2">DNI</th>
-                <th class="col-3">Address</th>
-                <th class="col-2 text-right">Total Sale</th>
-                <th class="col-2 text-center">Actions</th>
+                <th class="col-2 text-center">ID</th>
+                <th class="col-4 text-center">Name</th>
+                <th class="col-3 text-center">Price</th>
+                <th class="col-3 text-center">Actions</th>
               </tr>
             </thead>
             <tbody></tbody>
           </table>
         </div>
+
+        <div class="text-center">
+          <a class="btn btn-warning btn-lg add-size" href="/app/beverage/add-beverage.html">Add New Beverage</a>
+        </div>
       </div>
     </div>
 
-    <template id="order-item-template">
+    <template id="beverage-item-template">
       <tr class="d-flex">
-        <td class="col-3">{{client_name}}</td>
-        <td class="col-2">{{client_dni}}</td>
-        <td class="col-3">{{client_address}}</td>
-        <td class="col-2 text-right">${{total_price}}</td>
-        <td class="col-2">
+        <td class="col-2 text-center">{{_id}}</td>
+        <td class="col-4">{{name}}</td>
+        <td class="col-3">${{price}}</td>
+        <td class="col-3 text-center">
           <div class="text-center">
-            <a class="btn btn-success btn-sm view-order" href="/app/order/order-detail.html?_id={{_id}}">View</a>
+            <a class="btn btn-success btn-sm update-size disabled" href="/app/beverage/update-beverage.html?_id={{_id}}"
+              >Update</a
+            >
           </div>
         </td>
       </tr>
@@ -108,6 +112,6 @@
       crossorigin="anonymous"
     ></script>
 
-    <script src="/js/order/orders.js"></script>
+    <script src="/js/beverage/beverage.js"></script>
   </body>
 </html>

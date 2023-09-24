@@ -40,12 +40,19 @@ function getOrderData() {
         ingredients.push($(this).val());
     });
 
+    let beverages = [];
+    $.each($("input[name='beverages']:checked"), function (el) {
+        beverages.push($(this).val());
+    });
+    
+
     return {
         client_name: $("input[name='name']").val(),
         client_dni: $("input[name='dni']").val(),
         client_address: $("input[name='address']").val(),
         client_phone: $("input[name='phone']").val(),
         size_id: $("input[name='size']:checked").val(),
+        beverages,
         ingredients
     };
 }
@@ -82,6 +89,16 @@ function fetchOrderSizes() {
         });
 }
 
+function fetchBeverages(){
+    fetch('http://127.0.0.1:5000/beverage/')
+        .then(response => response.json())
+        .then(beverages => {
+            let rows = beverages.map(element => createBeverageTemplate(element));
+            let table = $("#beverages tbody");
+            table.append(rows);
+    });
+}
+
 function createIngredientTemplate(ingredient) {
     let template = $("#ingredients-template")[0].innerHTML;
     return Mustache.render(template, ingredient);
@@ -92,9 +109,15 @@ function createSizeTemplate(size) {
     return Mustache.render(template, size);
 }
 
+function createBeverageTemplate(beverage) {
+    let template = $("#beverages-template")[0].innerHTML;
+    return Mustache.render(template, beverage);
+}
+
 function loadInformation() {
     fetchIngredients();
     fetchOrderSizes();
+    fetchBeverages();
 }
 
 
